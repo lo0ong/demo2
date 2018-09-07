@@ -5,7 +5,7 @@
         <el-input type="text" v-model="ruleForm2.name" auto-complete="off" placeholder="账号"></el-input>
       </el-form-item>
       <el-form-item  prop="passwd">
-        <el-input type="password" v-model="ruleForm2.passwd" auto-complete="off" placeholder="密码"></el-input>
+        <el-input type="password" v-model="ruleForm2.passwd" auto-complete="off" placeholder="密码" @keyup.enter.native="submitForm('ruleForm2')"></el-input>
       </el-form-item>
       <el-form-item>
         <el-button type="primary" @click="submitForm('ruleForm2')">登录</el-button>
@@ -23,7 +23,7 @@
         ruleForm2: {
           name: '',
           passwd: '',
-          apiUrl: 'http://192.168.1.5:8080/demo/login'
+          apiUrl: 'http://10.252.39.59:8080/demo/login'
         },
         rules2: {
           name: [
@@ -37,6 +37,7 @@
         },
       };
     },
+
 
     methods: {
       submitForm(formName) {
@@ -63,8 +64,9 @@
               console.log('登录失败');
           }
       );
-         //    console.log('get');  
-        //      this.$http.get('http://192.168.1.5:8080/ZJ_ihst_00001/v1?appid='+this.ruleForm2.name +'&passwd=' + this.$md5(this.ruleForm2.passwd),{emulateJSON:true}).then(
+         //   console.log('get');  
+             //this.$http.get('http://10.252.39.59:8080:8080/ZJ_ihst_00001/v1?appid='+this.ruleForm2.name +'&passwd=' + this.$md5(this.ruleForm2.passwd),{emulateJSON:true}).then(
+        //      this.$http.get('http://10.252.39.59:8080/ZJ_ihst_00001/v1?appid='+this.ruleForm2.name +'&passwd=' + this.$md5(this.ruleForm2.passwd),{emulateJSON:true}).then(
         //      function (res) {
         //          // 处理成功的结果
         //         // console.log(res);
