@@ -15,15 +15,17 @@
 </template>
  
 <script>
+import  {requestLogin} from '@/api/api.js';
+
   export default {
-    name:'登录',
+
     
     data() {
       return {
         ruleForm2: {
-          name: '',
-          passwd: '',
-          apiUrl: 'http://10.252.39.59:8080/demo/login'
+          name: 'admin',
+          passwd: '123',
+         // apiUrl: 'http://10.252.39.59:8080/demo/login'
         },
         rules2: {
           name: [
@@ -44,26 +46,48 @@
         this.$refs[formName].validate((valid) => {
           if (valid) {
           console.log('post');  
-          this.$http.post(this.ruleForm2.apiUrl,{name:this.ruleForm2.name,passwd:this.ruleForm2.passwd},{emulateJSON:true}).then(
-          function (res) {
-              // 处理成功的结果
-              if(res.bodyText=='登录成功'){
+      //     this.$http.post(this.ruleForm2.apiUrl,{name:this.ruleForm2.name,passwd:this.ruleForm2.passwd},{emulateJSON:true}).then(
+      //     function (res) {
+      //         // 处理成功的结果
+      //         if(res.bodyText=='登录成功'){
+      //            this.$message({
+      //                 message: res.bodyText,
+      //                  type: 'success'
+      //            });              
+      //         this.$router.push('/charts' );
+      //         }else{
+      //           this.$message.error(res.bodyText);
+      //         }
+        
+      //         // console.log('登录成功');
+      //     },function (res) {
+      //     // 处理失败的结果
+      //         this.$message.error(res.bodyText);
+      //         console.log('登录失败');
+      //     }
+      // );
+
+            var loginParams = { name:this.ruleForm2.name, passwd:this.ruleForm2.passwd };
+
+             console.log(loginParams)
+            
+            requestLogin(loginParams).then(bodyText => {
+             console.log(bodyText);
+
+            if(bodyText == '登录成功'){
+              console.log('跳转');
+              
                  this.$message({
-                      message: res.bodyText,
+                      message: bodyText,
                        type: 'success'
                  });              
-              this.$router.push({ path: '/home' });
-              }else{
-                this.$message.error(res.bodyText);
+                 
+                 this.$router.push('/charts' );
+             }else{
+                this.$message.error(bodyText);
               }
-        
-              // console.log('登录成功');
-          },function (res) {
-          // 处理失败的结果
-              this.$message.error(res.bodyText);
-              console.log('登录失败');
-          }
-      );
+
+            });
          //   console.log('get');  
              //this.$http.get('http://10.252.39.59:8080:8080/ZJ_ihst_00001/v1?appid='+this.ruleForm2.name +'&passwd=' + this.$md5(this.ruleForm2.passwd),{emulateJSON:true}).then(
         //      this.$http.get('http://10.252.39.59:8080/ZJ_ihst_00001/v1?appid='+this.ruleForm2.name +'&passwd=' + this.$md5(this.ruleForm2.passwd),{emulateJSON:true}).then(
@@ -107,8 +131,8 @@
     -webkit-border-radius: 5px;
     border-radius: 5px;
     -moz-border-radius: 5px;
-    background-clip: padding-box;
-    margin: 180px auto;
+    /* background-clip: padding-box; */
+    margin: 150px auto;
     width: 350px;
     padding: 35px 35px 15px 35px;
     background: #fff;

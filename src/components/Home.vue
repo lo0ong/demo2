@@ -3,7 +3,7 @@
       	<el-col :span="24" class="header">
             <el-col :span="3" class="logo" >{{sysName}}
 			</el-col>
-            <el-col :span="4" class="userinfo">
+      <el-col :span="4" class="userinfo">
 			  	    <el-dropdown trigger="hover">
 			  	    	<span class="el-dropdown-link userinfo-inner "> {{sysUserName}}</span>
 			  	    	<el-dropdown-menu slot="dropdown">
@@ -17,17 +17,19 @@
       <el-col :span="3">
         <h5>工作台</h5>
         <el-menu
-          default-active="2"
+          default-active="3"
           class="el-menu-vertical-demo"
           @open="handleOpen"
-          @close="handleClose">
+          @close="handleClose"
+          router 
+         >
           <el-submenu index="1">
             <template slot="title">
               <i class="iconfont icon-dianshi"></i>
               <span>电视台</span>
             </template>
-              <el-menu-item index="1-1">湛江公共频道</el-menu-item>
-              <el-menu-item index="1-2">湛江综合频道</el-menu-item>
+              <el-menu-item index="1-1"  @click="$router.push('/publicTV')">湛江公共频道</el-menu-item>
+              <el-menu-item index="1-2" @click="$router.push('/generalTV')">湛江综合频道</el-menu-item>
           </el-submenu>
          <el-submenu index="2">
             <template slot="title">
@@ -37,9 +39,9 @@
               <el-menu-item index="2-1">98.1</el-menu-item>
               <el-menu-item index="2-2">102.1</el-menu-item>
           </el-submenu>
-          <el-menu-item index="3" >
+          <el-menu-item index="3"  @click="$router.push('/charts')">
             <i class="iconfont icon-stat"></i>
-            <span slot="title">统计分析</span>
+            <span slot="title" >统计分析</span>
           </el-menu-item>
           <el-menu-item index="4">
             <i class="iconfont icon-xinxi"></i>
@@ -47,6 +49,15 @@
           </el-menu-item>
         </el-menu>
       </el-col>
+
+    
+       <el-col :span="21" >
+					<el-col :span="24" class="content-wrapper">
+						<transition name="fade" mode="out-in">
+							<router-view></router-view>
+						</transition>
+					</el-col>
+		 </el-col>  
     </el-row>
 </template>
 
@@ -122,7 +133,10 @@
 	border-right-width: 1px;
 	border-right-style: solid;
 }
-
+.content-wrapper {
+	background-color: #fff;
+	box-sizing: border-box;
+}
 </style>
 
 

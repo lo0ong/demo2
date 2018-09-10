@@ -1,4 +1,5 @@
 <template>
-	<section>page6...
-	</section>
+
+<img src="../assets/logo.png" class="desktop"/>
+
 </template>
